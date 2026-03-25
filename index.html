@@ -15,10 +15,11 @@
 body {
     background: #0f172a;
     color: white;
-    text-align: center;
 }
 
+/* TÍTULO */
 h1 {
+    text-align: center;
     margin: 20px;
     font-size: 3em;
     color: #38bdf8;
@@ -32,7 +33,7 @@ h1 {
     padding: 20px;
 }
 
-/* CARD */
+/* CARDS */
 .card {
     background: #1e293b;
     border-radius: 15px;
@@ -41,10 +42,10 @@ h1 {
 }
 
 .card:hover {
-    transform: translateY(-5px) scale(1.05);
+    transform: scale(1.05);
 }
 
-/* "IMAGEM" ANIMADA */
+/* IMAGEM ANIMADA */
 .preview {
     height: 140px;
     display: flex;
@@ -55,7 +56,7 @@ h1 {
     overflow: hidden;
 }
 
-/* ANIMAÇÕES DIFERENTES */
+/* CORES */
 .tower { background: linear-gradient(45deg,#22c55e,#4ade80); }
 .runner { background: linear-gradient(45deg,#06b6d4,#0ea5e9); }
 .neon { background: linear-gradient(45deg,#a855f7,#ec4899); }
@@ -65,7 +66,7 @@ h1 {
 .ball { background: linear-gradient(45deg,#38bdf8,#6366f1); }
 .car { background: linear-gradient(45deg,#f43f5e,#e11d48); }
 
-/* brilho animado */
+/* ANIMAÇÃO BRILHO */
 .preview::after {
     content: "";
     position: absolute;
@@ -83,15 +84,18 @@ h1 {
 
 .card h3 {
     padding: 10px;
+    text-align: center;
 }
 
+/* BOTÃO */
 .play {
     display: block;
     margin: 10px;
-    padding: 8px;
+    padding: 10px;
     background: #38bdf8;
     color: black;
     border-radius: 10px;
+    text-align: center;
     text-decoration: none;
     font-weight: bold;
 }
@@ -111,7 +115,7 @@ h1 {
 </div>
 
 <div class="card">
-<div class="preview runner">🏃‍♂️</div>
+<div class="preview runner">🏃</div>
 <h3>Cyber Runner</h3>
 <a class="play" href="https://lucascoto98.github.io/CYBER-RUNNER/" target="_blank">Jogar</a>
 </div>
