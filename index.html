@@ -13,61 +13,23 @@
 }
 
 body {
-    display: flex;
     background: #0f172a;
     color: white;
+    text-align: center;
 }
 
-/* SIDEBAR */
-.sidebar {
-    width: 200px;
-    background: #020617;
-    height: 100vh;
-    padding: 20px;
-}
-
-.sidebar h2 {
+h1 {
+    margin: 20px;
+    font-size: 3em;
     color: #38bdf8;
-    margin-bottom: 20px;
-}
-
-.sidebar a {
-    display: block;
-    color: #94a3b8;
-    text-decoration: none;
-    margin: 10px 0;
-    transition: 0.2s;
-}
-
-.sidebar a:hover {
-    color: white;
-}
-
-/* MAIN */
-.main {
-    flex: 1;
-    padding: 20px;
-}
-
-/* TOP BAR */
-.topbar {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 20px;
-}
-
-.search {
-    width: 300px;
-    padding: 10px;
-    border-radius: 10px;
-    border: none;
 }
 
 /* GRID */
 .games {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
     gap: 20px;
+    padding: 20px;
 }
 
 /* CARD */
@@ -76,17 +38,47 @@ body {
     border-radius: 15px;
     overflow: hidden;
     transition: 0.3s;
-    cursor: pointer;
 }
 
 .card:hover {
-    transform: translateY(-5px) scale(1.03);
+    transform: translateY(-5px) scale(1.05);
 }
 
-.card img {
-    width: 100%;
+/* "IMAGEM" ANIMADA */
+.preview {
     height: 140px;
-    object-fit: cover;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 40px;
+    position: relative;
+    overflow: hidden;
+}
+
+/* ANIMAÇÕES DIFERENTES */
+.tower { background: linear-gradient(45deg,#22c55e,#4ade80); }
+.runner { background: linear-gradient(45deg,#06b6d4,#0ea5e9); }
+.neon { background: linear-gradient(45deg,#a855f7,#ec4899); }
+.fire { background: linear-gradient(45deg,#f97316,#ef4444); }
+.snake { background: linear-gradient(45deg,#84cc16,#22c55e); }
+.square { background: linear-gradient(45deg,#eab308,#facc15); }
+.ball { background: linear-gradient(45deg,#38bdf8,#6366f1); }
+.car { background: linear-gradient(45deg,#f43f5e,#e11d48); }
+
+/* brilho animado */
+.preview::after {
+    content: "";
+    position: absolute;
+    width: 200%;
+    height: 100%;
+    background: rgba(255,255,255,0.1);
+    transform: rotate(25deg);
+    animation: shine 3s linear infinite;
+}
+
+@keyframes shine {
+    from { left: -100%; }
+    to { left: 100%; }
 }
 
 .card h3 {
@@ -99,7 +91,6 @@ body {
     padding: 8px;
     background: #38bdf8;
     color: black;
-    text-align: center;
     border-radius: 10px;
     text-decoration: none;
     font-weight: bold;
@@ -109,71 +100,57 @@ body {
 </head>
 <body>
 
-<div class="sidebar">
-    <h2>🎮 Gaming Space</h2>
-    <a href="#">🏠 Home</a>
-    <a href="#">🔥 Popular</a>
-    <a href="#">🆕 Novos</a>
-    <a href="#">⭐ Favoritos</a>
+<h1>🎮 Gaming Space</h1>
+
+<div class="games">
+
+<div class="card">
+<div class="preview tower">🏰</div>
+<h3>Tower Defense</h3>
+<a class="play" href="https://lucascoto98.github.io/TOWERDEFENSE/" target="_blank">Jogar</a>
 </div>
 
-<div class="main">
+<div class="card">
+<div class="preview runner">🏃‍♂️</div>
+<h3>Cyber Runner</h3>
+<a class="play" href="https://lucascoto98.github.io/CYBER-RUNNER/" target="_blank">Jogar</a>
+</div>
 
-    <div class="topbar">
-        <input class="search" placeholder="Procurar jogos...">
-    </div>
+<div class="card">
+<div class="preview neon">🌈</div>
+<h3>Neon Jump</h3>
+<a class="play" href="https://lucascoto98.github.io/neon-jump-game/" target="_blank">Jogar</a>
+</div>
 
-    <div class="games">
+<div class="card">
+<div class="preview fire">🔥</div>
+<h3>Fireeee</h3>
+<a class="play" href="https://lucascoto98.github.io/Fireeee/" target="_blank">Jogar</a>
+</div>
 
-        <div class="card">
-            <img src="https://picsum.photos/400/200?1">
-            <h3>Tower Defense</h3>
-            <a class="play" href="https://lucascoto98.github.io/TOWERDEFENSE/" target="_blank">Jogar</a>
-        </div>
+<div class="card">
+<div class="preview snake">🐍</div>
+<h3>Snake Pro</h3>
+<a class="play" href="https://lucascoto98.github.io/Snake-Game---Pro/" target="_blank">Jogar</a>
+</div>
 
-        <div class="card">
-            <img src="https://picsum.photos/400/200?2">
-            <h3>Cyber Runner</h3>
-            <a class="play" href="https://lucascoto98.github.io/CYBER-RUNNER/" target="_blank">Jogar</a>
-        </div>
+<div class="card">
+<div class="preview square">🟨</div>
+<h3>Square Survivor</h3>
+<a class="play" href="https://lucascoto98.github.io/square-survivor/" target="_blank">Jogar</a>
+</div>
 
-        <div class="card">
-            <img src="https://picsum.photos/400/200?3">
-            <h3>Neon Jump</h3>
-            <a class="play" href="https://lucascoto98.github.io/neon-jump-game/" target="_blank">Jogar</a>
-        </div>
+<div class="card">
+<div class="preview ball">⚽</div>
+<h3>Kick Ball</h3>
+<a class="play" href="https://lucascoto98.github.io/Kick-Ball/" target="_blank">Jogar</a>
+</div>
 
-        <div class="card">
-            <img src="https://picsum.photos/400/200?4">
-            <h3>Fireeee</h3>
-            <a class="play" href="https://lucascoto98.github.io/Fireeee/" target="_blank">Jogar</a>
-        </div>
-
-        <div class="card">
-            <img src="https://picsum.photos/400/200?5">
-            <h3>Snake Pro</h3>
-            <a class="play" href="https://lucascoto98.github.io/Snake-Game---Pro/" target="_blank">Jogar</a>
-        </div>
-
-        <div class="card">
-            <img src="https://picsum.photos/400/200?6">
-            <h3>Square Survivor</h3>
-            <a class="play" href="https://lucascoto98.github.io/square-survivor/" target="_blank">Jogar</a>
-        </div>
-
-        <div class="card">
-            <img src="https://picsum.photos/400/200?7">
-            <h3>Kick Ball</h3>
-            <a class="play" href="https://lucascoto98.github.io/Kick-Ball/" target="_blank">Jogar</a>
-        </div>
-
-        <div class="card">
-            <img src="https://picsum.photos/400/200?8">
-            <h3>Game Car</h3>
-            <a class="play" href="https://lucascoto98.github.io/game-car/" target="_blank">Jogar</a>
-        </div>
-
-    </div>
+<div class="card">
+<div class="preview car">🚗</div>
+<h3>Game Car</h3>
+<a class="play" href="https://lucascoto98.github.io/game-car/" target="_blank">Jogar</a>
+</div>
 
 </div>
 
