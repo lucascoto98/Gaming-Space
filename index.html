@@ -1,110 +1,105 @@
 <!DOCTYPE html>
 <html lang="pt">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Gaming Space</title>
-<meta name="google-site-verification" content="hdFbjowA_HJwSwnyWbb-pGlbhVGDp3LnL0HOHpJzJj0" />
-<style>
-body{
-    font-family: Arial, sans-serif;
-    background: #111;
-    color: white;
-    text-align: center;
-    margin:0;
-}
+    <meta charset="UTF-8">
+    <title>Gaming Space</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #0f172a, #1e293b);
+            color: white;
+            text-align: center;
+        }
 
-header{
-    background:#1e1e1e;
-    padding:20px;
-    font-size:28px;
-    font-weight:bold;
-}
+        h1 {
+            margin: 20px;
+            font-size: 3em;
+            color: #38bdf8;
+        }
 
-.container{
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-    gap:20px;
-    padding:30px;
-}
+        .games {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            padding: 20px;
+        }
 
-.game{
-    background:#1f1f1f;
-    padding:20px;
-    border-radius:12px;
-    transition:0.2s;
-}
+        .game-card {
+            background: #1e293b;
+            border-radius: 15px;
+            padding: 10px;
+            box-shadow: 0 0 15px rgba(0,0,0,0.5);
+            transition: 0.3s;
+        }
 
-.game:hover{
-    transform:scale(1.05);
-}
+        .game-card:hover {
+            transform: scale(1.05);
+        }
 
-button{
-    margin-top:10px;
-    padding:10px 18px;
-    border:none;
-    border-radius:8px;
-    background:#00c3ff;
-    color:white;
-    font-size:16px;
-    cursor:pointer;
-}
+        iframe {
+            width: 100%;
+            height: 200px;
+            border-radius: 10px;
+            border: none;
+        }
 
-button:hover{
-    background:#0099cc;
-}
-</style>
+        a {
+            display: block;
+            margin-top: 10px;
+            color: #38bdf8;
+            text-decoration: none;
+            font-weight: bold;
+        }
+    </style>
 </head>
-
 <body>
 
-<header>Gaming Space</header>
+<h1>🎮 Gaming Space</h1>
 
-<div class="container">
+<div class="games">
 
-<div class="game">
-<h2>Neon Jump</h2>
-<a href="https://lucascoto98.github.io/neon-jump-game/" target="_blank">
-<button>Jogar</button>
-</a>
-</div>
+    <div class="game-card">
+        <iframe src="https://lucascoto98.github.io/TOWERDEFENSE/"></iframe>
+        <a href="https://lucascoto98.github.io/TOWERDEFENSE/" target="_blank">Tower Defense</a>
+    </div>
 
-<div class="game">
-<h2>Snake Game</h2>
-<a href="https://lucascoto98.github.io/Snake-Game---Pro/" target="_blank">
-<button>Jogar</button>
-</a>
-</div>
+    <div class="game-card">
+        <iframe src="https://lucascoto98.github.io/CYBER-RUNNER/"></iframe>
+        <a href="https://lucascoto98.github.io/CYBER-RUNNER/" target="_blank">Cyber Runner</a>
+    </div>
 
-<div class="game">
-<h2>Square Survivor</h2>
-<a href="https://lucascoto98.github.io/square-survivor/" target="_blank">
-<button>Jogar</button>
-</a>
-</div>
+    <div class="game-card">
+        <iframe src="https://lucascoto98.github.io/neon-jump-game/"></iframe>
+        <a href="https://lucascoto98.github.io/neon-jump-game/" target="_blank">Neon Jump</a>
+    </div>
 
-<div class="game">
-<h2>Fireeee</h2>
-<a href="https://lucascoto98.github.io/Fireeee/" target="_blank">
-<button>Jogar</button>
-</a>
-</div>
+    <div class="game-card">
+        <iframe src="https://lucascoto98.github.io/Fireeee/"></iframe>
+        <a href="https://lucascoto98.github.io/Fireeee/" target="_blank">Fireeee</a>
+    </div>
 
-<div class="game">
-<h2>Kick Ball</h2>
-<a href="https://lucascoto98.github.io/Kick-Ball/" target="_blank">
-<button>Jogar</button>
-</a>
-</div>
+    <div class="game-card">
+        <iframe src="https://lucascoto98.github.io/Snake-Game---Pro/"></iframe>
+        <a href="https://lucascoto98.github.io/Snake-Game---Pro/" target="_blank">Snake Pro</a>
+    </div>
 
-<div class="game">
-<h2>Game Car</h2>
-<a href="https://lucascoto98.github.io/game-car/" target="_blank">
-<button>Jogar</button>
-</a>
-</div>
+    <div class="game-card">
+        <iframe src="https://lucascoto98.github.io/square-survivor/"></iframe>
+        <a href="https://lucascoto98.github.io/square-survivor/" target="_blank">Square Survivor</a>
+    </div>
+
+    <div class="game-card">
+        <iframe src="https://lucascoto98.github.io/Kick-Ball/"></iframe>
+        <a href="https://lucascoto98.github.io/Kick-Ball/" target="_blank">Kick Ball</a>
+    </div>
+
+    <div class="game-card">
+        <iframe src="https://lucascoto98.github.io/game-car/"></iframe>
+        <a href="https://lucascoto98.github.io/game-car/" target="_blank">Game Car</a>
+    </div>
 
 </div>
-    
+
 </body>
 </html>
