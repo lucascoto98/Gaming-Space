@@ -1,57 +1,64 @@
 <!DOCTYPE html>
 <html lang="pt">
 <head>
-    <meta charset="UTF-8">
-    <title>Gaming Space</title>
-    <style>
-        body {
-            margin: 0;
-            font-family: Arial, sans-serif;
-            background: linear-gradient(135deg, #0f172a, #1e293b);
-            color: white;
-            text-align: center;
-        }
+<meta charset="UTF-8">
+<title>Gaming Space</title>
 
-        h1 {
-            margin: 20px;
-            font-size: 3em;
-            color: #38bdf8;
-        }
+<style>
+body {
+    margin: 0;
+    font-family: Arial;
+    background: linear-gradient(135deg, #0f172a, #1e293b);
+    color: white;
+    text-align: center;
+}
 
-        .games {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 20px;
-            padding: 20px;
-        }
+h1 {
+    margin: 20px;
+    font-size: 3em;
+    color: #38bdf8;
+}
 
-        .game-card {
-            background: #1e293b;
-            border-radius: 15px;
-            padding: 10px;
-            box-shadow: 0 0 15px rgba(0,0,0,0.5);
-            transition: 0.3s;
-        }
+.games {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+    padding: 20px;
+}
 
-        .game-card:hover {
-            transform: scale(1.05);
-        }
+.card {
+    background: #1e293b;
+    border-radius: 15px;
+    overflow: hidden;
+    transition: 0.3s;
+}
 
-        iframe {
-            width: 100%;
-            height: 200px;
-            border-radius: 10px;
-            border: none;
-        }
+.card:hover {
+    transform: scale(1.05);
+}
 
-        a {
-            display: block;
-            margin-top: 10px;
-            color: #38bdf8;
-            text-decoration: none;
-            font-weight: bold;
-        }
-    </style>
+.card img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+}
+
+.card h3 {
+    margin: 10px 0;
+}
+
+.play-btn {
+    display: inline-block;
+    margin-bottom: 15px;
+    padding: 10px 20px;
+    background: #38bdf8;
+    color: black;
+    border-radius: 10px;
+    text-decoration: none;
+    font-weight: bold;
+}
+</style>
+
 </head>
 <body>
 
@@ -59,45 +66,53 @@
 
 <div class="games">
 
-    <div class="game-card">
-        <iframe src="https://lucascoto98.github.io/TOWERDEFENSE/"></iframe>
-        <a href="https://lucascoto98.github.io/TOWERDEFENSE/" target="_blank">Tower Defense</a>
-    </div>
+<div class="card">
+<img src="https://via.placeholder.com/400x200?text=Tower+Defense">
+<h3>Tower Defense</h3>
+<a class="play-btn" href="https://lucascoto98.github.io/TOWERDEFENSE/" target="_blank">Jogar</a>
+</div>
 
-    <div class="game-card">
-        <iframe src="https://lucascoto98.github.io/CYBER-RUNNER/"></iframe>
-        <a href="https://lucascoto98.github.io/CYBER-RUNNER/" target="_blank">Cyber Runner</a>
-    </div>
+<div class="card">
+<img src="https://via.placeholder.com/400x200?text=Cyber+Runner">
+<h3>Cyber Runner</h3>
+<a class="play-btn" href="https://lucascoto98.github.io/CYBER-RUNNER/" target="_blank">Jogar</a>
+</div>
 
-    <div class="game-card">
-        <iframe src="https://lucascoto98.github.io/neon-jump-game/"></iframe>
-        <a href="https://lucascoto98.github.io/neon-jump-game/" target="_blank">Neon Jump</a>
-    </div>
+<div class="card">
+<img src="https://via.placeholder.com/400x200?text=Neon+Jump">
+<h3>Neon Jump</h3>
+<a class="play-btn" href="https://lucascoto98.github.io/neon-jump-game/" target="_blank">Jogar</a>
+</div>
 
-    <div class="game-card">
-        <iframe src="https://lucascoto98.github.io/Fireeee/"></iframe>
-        <a href="https://lucascoto98.github.io/Fireeee/" target="_blank">Fireeee</a>
-    </div>
+<div class="card">
+<img src="https://via.placeholder.com/400x200?text=Fireeee">
+<h3>Fireeee</h3>
+<a class="play-btn" href="https://lucascoto98.github.io/Fireeee/" target="_blank">Jogar</a>
+</div>
 
-    <div class="game-card">
-        <iframe src="https://lucascoto98.github.io/Snake-Game---Pro/"></iframe>
-        <a href="https://lucascoto98.github.io/Snake-Game---Pro/" target="_blank">Snake Pro</a>
-    </div>
+<div class="card">
+<img src="https://via.placeholder.com/400x200?text=Snake+Pro">
+<h3>Snake Pro</h3>
+<a class="play-btn" href="https://lucascoto98.github.io/Snake-Game---Pro/" target="_blank">Jogar</a>
+</div>
 
-    <div class="game-card">
-        <iframe src="https://lucascoto98.github.io/square-survivor/"></iframe>
-        <a href="https://lucascoto98.github.io/square-survivor/" target="_blank">Square Survivor</a>
-    </div>
+<div class="card">
+<img src="https://via.placeholder.com/400x200?text=Square+Survivor">
+<h3>Square Survivor</h3>
+<a class="play-btn" href="https://lucascoto98.github.io/square-survivor/" target="_blank">Jogar</a>
+</div>
 
-    <div class="game-card">
-        <iframe src="https://lucascoto98.github.io/Kick-Ball/"></iframe>
-        <a href="https://lucascoto98.github.io/Kick-Ball/" target="_blank">Kick Ball</a>
-    </div>
+<div class="card">
+<img src="https://via.placeholder.com/400x200?text=Kick+Ball">
+<h3>Kick Ball</h3>
+<a class="play-btn" href="https://lucascoto98.github.io/Kick-Ball/" target="_blank">Jogar</a>
+</div>
 
-    <div class="game-card">
-        <iframe src="https://lucascoto98.github.io/game-car/"></iframe>
-        <a href="https://lucascoto98.github.io/game-car/" target="_blank">Game Car</a>
-    </div>
+<div class="card">
+<img src="https://via.placeholder.com/400x200?text=Game+Car">
+<h3>Game Car</h3>
+<a class="play-btn" href="https://lucascoto98.github.io/game-car/" target="_blank">Jogar</a>
+</div>
 
 </div>
 
