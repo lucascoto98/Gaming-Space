@@ -1,191 +1,582 @@
 <!DOCTYPE html>
 <html lang="pt">
 <head>
-<meta charset="UTF-8">
-<title>Gaming Space</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gaming Space X - Ultimate Arcade</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --bg-color: #060713;
+            --panel-bg: rgba(13, 17, 39, 0.7);
+            --primary-neon: #00f0ff;
+            --secondary-neon: #ff007f;
+            --accent-neon: #7000ff;
+            --text-color: #e2e8f0;
+            --card-glow: rgba(0, 240, 255, 0.15);
+        }
 
-<style>
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: Arial;
-}
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Rajdhani', sans-serif;
+        }
 
-body {
-    background: linear-gradient(135deg, #0f172a, #020617);
-    color: white;
-}
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            overflow-x: hidden;
+            position: relative;
+            min-height: 100vh;
+        }
 
-/* HEADER */
-header {
-    text-align: center;
-    padding: 30px 20px;
-}
+        /* Fundo Animado Baseado em Canvas */
+        #space-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            pointer-events: none;
+        }
 
-header h1 {
-    font-size: 3em;
-    color: #38bdf8;
-}
+        /* Header Futurista */
+        header {
+            background: linear-gradient(180deg, rgba(6, 7, 19, 0.9) 0%, rgba(6, 7, 19, 0) 100%);
+            padding: 30px 5%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            position: relative;
+            z-index: 10;
+        }
 
-header p {
-    color: #94a3b8;
-    margin-top: 10px;
-}
+        .logo-container {
+            margin-bottom: 15px;
+        }
 
-/* GRID */
-.games {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
-    gap: 25px;
-    padding: 30px;
-}
+        h1 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 3rem;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            color: #fff;
+            text-shadow: 0 0 10px var(--primary-neon), 0 0 20px var(--accent-neon);
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
 
-/* CARD */
-.card {
-    background: #1e293b;
-    border-radius: 15px;
-    overflow: hidden;
-    transition: 0.3s;
-    box-shadow: 0 10px 20px rgba(0,0,0,0.3);
-}
+        h1 i {
+            color: var(--secondary-neon);
+            animation: pulse 2s infinite alternate;
+        }
 
-.card:hover {
-    transform: translateY(-8px) scale(1.03);
-}
+        header p {
+            font-size: 1.2rem;
+            color: #a0aec0;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 25px;
+        }
 
-/* PREVIEW */
-.preview {
-    height: 150px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 45px;
-    position: relative;
-}
+        /* Central de Controlo (Filtros e Pesquisa) */
+        .control-panel {
+            background: var(--panel-bg);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(0, 240, 255, 0.2);
+            padding: 15px 30px;
+            border-radius: 50px;
+            display: flex;
+            gap: 20px;
+            align-items: center;
+            max-width: 800px;
+            width: 100%;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
 
-/* CORES */
-.tower { background: linear-gradient(45deg,#22c55e,#4ade80); }
-.runner { background: linear-gradient(45deg,#06b6d4,#0ea5e9); }
-.neon { background: linear-gradient(45deg,#a855f7,#ec4899); }
-.fire { background: linear-gradient(45deg,#f97316,#ef4444); }
-.snake { background: linear-gradient(45deg,#84cc16,#22c55e); }
-.square { background: linear-gradient(45deg,#eab308,#facc15); }
-.ball { background: linear-gradient(45deg,#38bdf8,#6366f1); }
-.car { background: linear-gradient(45deg,#f43f5e,#e11d48); }
+        .search-box {
+            position: relative;
+            flex: 1;
+        }
 
-/* INFO */
-.card h3 {
-    text-align: center;
-    margin: 10px;
-}
+        .search-box i {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--primary-neon);
+        }
 
-.card p {
-    text-align: center;
-    font-size: 0.9em;
-    color: #94a3b8;
-    margin-bottom: 10px;
-}
+        .search-box input {
+            width: 100%;
+            background: rgba(0,0,0,0.4);
+            border: 1px solid rgba(255,255,255,0.1);
+            padding: 10px 10px 10px 45px;
+            border-radius: 25px;
+            color: #fff;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
 
-/* BOTÃO */
-.play {
-    display: block;
-    margin: 10px;
-    padding: 10px;
-    background: #38bdf8;
-    color: black;
-    border-radius: 10px;
-    text-align: center;
-    text-decoration: none;
-    font-weight: bold;
-    transition: 0.2s;
-}
+        .search-box input:focus {
+            outline: none;
+            border-color: var(--primary-neon);
+            box-shadow: 0 0 10px rgba(0, 240, 255, 0.3);
+        }
 
-.play:hover {
-    background: #0ea5e9;
-}
+        .filter-buttons {
+            display: flex;
+            gap: 10px;
+        }
 
-/* FOOTER */
-footer {
-    text-align: center;
-    padding: 20px;
-    color: #64748b;
-}
-</style>
+        .filter-btn {
+            background: transparent;
+            border: 1px solid rgba(255,255,255,0.1);
+            color: #fff;
+            padding: 8px 18px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+        }
 
+        .filter-btn.active, .filter-btn:hover {
+            background: linear-gradient(45deg, var(--accent-neon), var(--secondary-neon));
+            border-color: transparent;
+            box-shadow: 0 0 15px rgba(255, 0, 127, 0.4);
+        }
+
+        /* Grid de Jogos */
+        main {
+            padding: 40px 5%;
+            max-width: 1400px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 10;
+        }
+
+        .games-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 35px;
+        }
+
+        /* Cartão de Jogo Futurista (Estilo Cyberpunk) */
+        .game-card {
+            background: var(--panel-bg);
+            border-radius: 20px;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.4);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            display: flex;
+            flex-direction: column;
+            position: relative;
+        }
+
+        .game-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary-neon), var(--accent-neon));
+            transition: all 0.3s;
+        }
+
+        .game-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            border-color: var(--primary-neon);
+            box-shadow: 0 0 30px var(--card-glow);
+        }
+
+        .game-card:hover::before {
+            background: linear-gradient(90deg, var(--secondary-neon), var(--primary-neon));
+        }
+
+        /* Ícone/Capa Visual */
+        .game-visual {
+            height: 160px;
+            background: linear-gradient(135deg, rgba(20,24,50,1) 0%, rgba(8,10,26,1) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+        }
+
+        .game-icon {
+            font-size: 4.5rem;
+            transition: transform 0.3s ease;
+        }
+
+        .game-card:hover .game-icon {
+            transform: scale(1.15) rotate(5deg);
+        }
+
+        /* Badge de Categoria */
+        .game-tag {
+            position: absolute;
+            bottom: 15px;
+            right: 15px;
+            background: rgba(0, 0, 0, 0.6);
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            color: var(--primary-neon);
+            border: 1px solid rgba(0, 240, 255, 0.3);
+            text-transform: uppercase;
+        }
+
+        /* Info do Jogo */
+        .game-info {
+            padding: 25px;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+            text-align: center;
+        }
+
+        .game-info h3 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.4rem;
+            color: #fff;
+            margin-bottom: 10px;
+            letter-spacing: 1px;
+        }
+
+        .game-info p {
+            color: #a0aec0;
+            font-size: 0.95rem;
+            line-height: 1.4;
+            margin-bottom: 20px;
+            flex-grow: 1;
+        }
+
+        /* Botão Jogar Cyberpunk */
+        .play-btn {
+            background: transparent;
+            color: #fff;
+            border: 2px solid var(--primary-neon);
+            padding: 12px 25px;
+            border-radius: 10px;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .play-btn::after {
+            content: '';
+            position: absolute;
+            background: var(--primary-neon);
+            top: 0; left: -100%; width: 100%; height: 100%;
+            transition: all 0.4s ease;
+            z-index: -1;
+            opacity: 0.2;
+        }
+
+        .game-card:hover .play-btn {
+            background: var(--primary-neon);
+            color: #000;
+            box-shadow: 0 0 15px var(--primary-neon);
+        }
+
+        /* Footer */
+        footer {
+            background: #04050d;
+            padding: 30px;
+            text-align: center;
+            border-top: 1px solid rgba(255,255,255,0.05);
+            margin-top: 50px;
+            position: relative;
+            z-index: 10;
+        }
+
+        footer p {
+            color: #718096;
+            font-size: 1rem;
+            letter-spacing: 1px;
+        }
+
+        footer span {
+            color: var(--secondary-neon);
+        }
+
+        /* Animações */
+        @keyframes pulse {
+            0% { transform: scale(1); filter: drop-shadow(0 0 2px var(--secondary-neon)); }
+            100% { transform: scale(1.1); filter: drop-shadow(0 0 10px var(--secondary-neon)); }
+        }
+
+        /* Responsividade */
+        @media (max-width: 768px) {
+            header h1 { font-size: 2.2rem; }
+            .control-panel {
+                flex-direction: column;
+                border-radius: 20px;
+                padding: 20px;
+            }
+            .filter-buttons {
+                width: 100%;
+                justify-content: center;
+                flex-wrap: wrap;
+            }
+            .search-box { width: 100%; }
+        }
+    </style>
 </head>
-
 <body>
 
-<header>
-    <h1>🎮 Gaming Space</h1>
-    <p>🕹️ Carrega em jogar, a diversão começa aqui!</p>
-</header>
+    <canvas id="space-canvas"></canvas>
 
-<div class="games">
+    <header>
+        <div class="logo-container">
+            <h1><i class="fa-solid ba-gamepad"></i> Gaming Space X</h1>
+        </div>
+        <p>A derradeira evolução do teu espaço arcade</p>
 
-<!-- JOGO -->
-<div class="card">
-<div class="preview tower">🏰</div>
-<h3>Tower Defense</h3>
-<p>Defende a tua base</p>
-<a class="play" href="https://lucascoto98.github.io/TOWERDEFENSE/" target="_blank">Jogar</a>
-</div>
+        <div class="control-panel">
+            <div class="search-box">
+                <i class="fa-solid fa-magnifying-glass"></i>
+                <input type="text" id="searchGame" placeholder="Procurar um jogo do futuro...">
+            </div>
+            <div class="filter-buttons">
+                <button class="filter-btn active" onclick="filterCategory('all')">Todos</button>
+                <button class="filter-btn" onclick="filterCategory('action')">Ação</button>
+                <button class="filter-btn" onclick="filterCategory('arcade')">Arcade</button>
+                <button class="filter-btn" onclick="filterCategory('strategy')">Estratégia</button>
+            </div>
+        </div>
+    </header>
 
-<div class="card">
-<div class="preview runner">🏃</div>
-<h3>Cyber Runner</h3>
-<p>Corre e desvia obstáculos</p>
-<a class="play" href="https://lucascoto98.github.io/CYBER-RUNNER/" target="_blank">Jogar</a>
-</div>
+    <main>
+        <div class="games-grid" id="gamesGrid">
+            
+            <div class="game-card" data-category="strategy" data-name="tower defense">
+                <div class="game-visual">
+                    <span class="game-icon">🏰</span>
+                    <span class="game-tag">Estratégia</span>
+                </div>
+                <div class="game-info">
+                    <h3>Tower Defense</h3>
+                    <p>Planeia a melhor estratégia, posiciona as tuas torres de defesa e impede a invasão inimiga na tua base.</p>
+                    <a href="https://lucascoto98.github.io/TOWERDEFENSE/" target="_blank" class="play-btn">Jogar Agora</a>
+                </div>
+            </div>
 
-<div class="card">
-<div class="preview neon">🌈</div>
-<h3>Neon Jump</h3>
-<p>Salta no ritmo neon</p>
-<a class="play" href="https://lucascoto98.github.io/neon-jump-game/" target="_blank">Jogar</a>
-</div>
+            <div class="game-card" data-category="action" data-name="cyber runner">
+                <div class="game-visual">
+                    <span class="game-icon">🏃</span>
+                    <span class="game-tag">Ação</span>
+                </div>
+                <div class="game-info">
+                    <h3>Cyber Runner</h3>
+                    <p>Corre à velocidade da luz, desvia-te de obstáculos mortais neste corredor infinito gerado no ciberespaço.</p>
+                    <a href="https://lucascoto98.github.io/CYBER-RUNNER/" target="_blank" class="play-btn">Jogar Agora</a>
+                </div>
+            </div>
 
-<div class="card">
-<div class="preview fire">🔥</div>
-<h3>Fireeee</h3>
-<p>Ação rápida e intensa</p>
-<a class="play" href="https://lucascoto98.github.io/Fireeee/" target="_blank">Jogar</a>
-</div>
+            <div class="game-card" data-category="arcade" data-name="neon jump">
+                <div class="game-visual">
+                    <span class="game-icon">🌈</span>
+                    <span class="game-tag">Arcade</span>
+                </div>
+                <div class="game-info">
+                    <h3>Neon Jump</h3>
+                    <p>Salta no ritmo frenético das luzes de néon. Um desafio de reflexos rápidos e muita cor.</p>
+                    <a href="https://lucascoto98.github.io/neon-jump-game/" target="_blank" class="play-btn">Jogar Agora</a>
+                </div>
+            </div>
 
-<div class="card">
-<div class="preview snake">🐍</div>
-<h3>Snake Pro</h3>
-<p>Um clássico com upgrade</p>
-<a class="play" href="https://lucascoto98.github.io/Snake-Game---Pro/" target="_blank">Jogar</a>
-</div>
+            <div class="game-card" data-category="action" data-name="fireeee">
+                <div class="game-visual">
+                    <span class="game-icon">🔥</span>
+                    <span class="game-tag">Ação</span>
+                </div>
+                <div class="game-info">
+                    <h3>Fireeee</h3>
+                    <p>Ação rápida, calor extremo e intensidade máxima. Sobrevive a cenários flamejantes cheios de perigo.</p>
+                    <a href="https://lucascoto98.github.io/Fireeee/" target="_blank" class="play-btn">Jogar Agora</a>
+                </div>
+            </div>
 
-<div class="card">
-<div class="preview square">🟨</div>
-<h3>Square Survivor</h3>
-<p>Sobrevive o máximo possível</p>
-<a class="play" href="https://lucascoto98.github.io/square-survivor/" target="_blank">Jogar</a>
-</div>
+            <div class="game-card" data-category="arcade" data-name="snake pro">
+                <div class="game-visual">
+                    <span class="game-icon">🐍</span>
+                    <span class="game-tag">Arcade</span>
+                </div>
+                <div class="game-info">
+                    <h3>Snake Pro</h3>
+                    <p>O maior clássico dos videojogos regressa com um upgrade moderno. Come os alvos e bate novos recordes mundiais.</p>
+                    <a href="https://lucascoto98.github.io/Snake-Game---Pro/" target="_blank" class="play-btn">Jogar Agora</a>
+                </div>
+            </div>
 
-<div class="card">
-<div class="preview ball">⚽</div>
-<h3>Kick Ball</h3>
-<p>Mostra as tuas habilidades em futebol</p>
-<a class="play" href="https://lucascoto98.github.io/Kick-Ball/" target="_blank">Jogar</a>
-</div>
+            <div class="game-card" data-category="action" data-name="square survivor">
+                <div class="game-visual">
+                    <span class="game-icon">🟨</span>
+                    <span class="game-tag">Ação</span>
+                </div>
+                <div class="game-info">
+                    <h3>Square Survivor</h3>
+                    <p>Rodeado por inimigos geométricos por todos os lados. Aguenta o máximo de tempo que conseguires neste bullet hell.</p>
+                    <a href="https://lucascoto98.github.io/square-survivor/" target="_blank" class="play-btn">Jogar Agora</a>
+                </div>
+            </div>
 
-<div class="card">
-<div class="preview car">🚗</div>
-<h3>Game Car</h3>
-<p>Acelera e evita colisões</p>
-<a class="play" href="https://lucascoto98.github.io/game-car/" target="_blank">Jogar</a>
-</div>
+            <div class="game-card" data-category="arcade" data-name="kick ball">
+                <div class="game-visual">
+                    <span class="game-icon">⚽</span>
+                    <span class="game-tag">Arcade</span>
+                </div>
+                <div class="game-info">
+                    <h3>Kick Ball</h3>
+                    <p>Entra em campo e mostra toda a tua habilidade e controlo de bola num mini-jogo de futebol super divertido.</p>
+                    <a href="https://lucascoto98.github.io/Kick-Ball/" target="_blank" class="play-btn">Jogar Agora</a>
+                </div>
+            </div>
 
-</div>
+            <div class="game-card" data-category="arcade" data-name="game car">
+                <div class="game-visual">
+                    <span class="game-icon">🚗</span>
+                    <span class="game-tag">Arcade</span>
+                </div>
+                <div class="game-info">
+                    <h3>Game Car</h3>
+                    <p>Pisa no acelerador, faz ultrapassagens perigosas e evita colisões brutais a alta velocidade.</p>
+                    <a href="https://lucascoto98.github.io/game-car/" target="_blank" class="play-btn">Jogar Agora</a>
+                </div>
+            </div>
 
-<footer>
-    © 2026 Gaming Space | Lucas Côto 🚀
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 Gaming Space X | Criado com <span><i class="fa-solid fa-heart"></i></span> para os melhores jogadores</p>
+    </footer>
+
+    <script>
+        // --- Mecanismo de Filtro e Pesquisa ---
+        const searchInput = document.getElementById('searchGame');
+        const cards = document.querySelectorAll('.game-card');
+
+        searchInput.addEventListener('input', filterGames);
+
+        function filterCategory(category) {
+            // Atualizar botões ativos
+            document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+            
+            // Guardar categoria ativa no dataset do grid para a pesquisa ler também
+            document.getElementById('gamesGrid').dataset.activeCategory = category;
+            filterGames();
+        }
+
+        function filterGames() {
+            const query = searchInput.value.toLowerCase();
+            const activeCategory = document.getElementById('gamesGrid').dataset.activeCategory || 'all';
+
+            cards.forEach(card => {
+                const name = card.dataset.name;
+                const category = card.dataset.category;
+                
+                const matchesSearch = name.includes(query);
+                const matchesCategory = activeCategory === 'all' || category === activeCategory;
+
+                if (matchesSearch && matchesCategory) {
+                    card.style.display = 'flex';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+
+        // --- Fundo Animado de Partículas Espaciais (Canvas) ---
+        const canvas = document.getElementById('space-canvas');
+        const ctx = canvas.getContext('2d');
+
+        let particles = [];
+        const particleCount = 100;
+
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        window.addEventListener('resize', resizeCanvas);
+        resizeCanvas();
+
+        class Particle {
+            constructor() {
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * canvas.height;
+                this.size = Math.random() * 2 + 0.5;
+                this.speedX = (Math.random() - 0.5) * 0.5;
+                this.speedY = (Math.random() - 0.5) * 0.5;
+                this.color = Math.random() > 0.5 ? '#00f0ff' : '#ff007f';
+                this.alpha = Math.random();
+            }
+
+            update() {
+                this.x += this.speedX;
+                this.y += this.speedY;
+
+                if (this.x < 0 || this.x > canvas.width) this.speedX *= -1;
+                if (this.y < 0 || this.y > canvas.height) this.speedY *= -1;
+            }
+
+            draw() {
+                ctx.save();
+                ctx.globalAlpha = this.alpha;
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fillStyle = this.color;
+                ctx.shadowBlur = 10;
+                ctx.shadowColor = this.color;
+                ctx.fill();
+                ctx.restore();
+            }
+        }
+
+        function initParticles() {
+            for (let i = 0; i < particleCount; i++) {
+                particles.push(new Particle());
+            }
+        }
+
+        function animate() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            particles.forEach(p => {
+                p.update();
+                p.draw();
+            });
+            requestAnimationFrame(animate);
+        }
+
+        initParticles();
+        animate();
+    </script>
+    <footer class="gaming-footer">
+    <p>© 2026 Gaming Space | <span class="author-name">Lucas Côto</span> <span class="rocket-icon">🚀</span></p>
 </footer>
-
 </body>
+    
 </html>
